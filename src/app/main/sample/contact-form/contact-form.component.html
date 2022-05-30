@@ -1,0 +1,49 @@
+<!-- <div class="dialog-content-wrapper">
+    <mat-toolbar matDialogTitle class="mat-accent m-0">
+        <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+            <span class="title dialog-title">{{dialogTitle}}</span>
+            <button mat-icon-button (click)="matDialogRef.close()" aria-label="Close dialog">
+                <mat-icon>close</mat-icon>
+            </button>
+        </mat-toolbar-row>
+    </mat-toolbar>
+
+    <div mat-dialog-content class="p-24 pb-0 m-0" fusePerfectScrollbar>
+
+        <form [formGroup]="editForm" (ngSubmit)="saveReclamation()" #message >
+            <div class="column small-12 large-2">
+                <label >Enseignement:</label>
+                <select formControlName="enseignement">
+                   <option [ngValue] = "enseign" *ngFor="let enseign of enseignements ">{{enseign}}</option>
+                </select>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="start start">
+                <mat-form-field appearance="outline" floatLabel="always" class="w-100-p">
+                    <mat-label>Note</mat-label>
+                    <input matInput placeholder="Saisir votre note"
+                           name="noteReclamation"
+                           formControlName="noteReclamation"
+                           type="number">
+                </mat-form-field>    
+            </div>
+            
+
+        </form>
+        <div mat-dialog-actions class="m-0 p-16" fxLayout="row" fxLayoutAlign="end center">
+
+            <button 
+                    mat-button
+                    class="save-button"
+                    (click)="saveReclamation(message.value, action.value)"
+                    [disabled]="editForm.invalid"
+                    aria-label="SAVE">
+                SAVE
+            </button>
+            
+        </div>
+    </div>
+
+   
+</div>
+ -->

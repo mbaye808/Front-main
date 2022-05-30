@@ -1,0 +1,32 @@
+<div id="mail-confirm" fxLayout="column">
+
+    <div id="mail-confirm-form-wrapper" fxLayout="column" fxLayoutAlign="center center">
+
+        <div id="mail-confirm-form" [@animate]="{value:'*',params:{duration:'300ms',y:'100px'}}">
+
+            <div class="logo">
+                <mat-icon class="mat-accent s-96">email</mat-icon>
+            </div>
+
+            <div class="title">Confirmez votre adresse mail!</div>
+
+            <div class="subtitle">
+                <div class="alert alert-success" *ngIf="success">
+                    <span ><strong>Votre compte utilisateur a été activé avec succès.</strong> Please </span>
+                    
+                </div>
+    
+                <div class="alert alert-danger" *ngIf="error" >
+                    <strong>Votre compte utilisateur n'est pas activé.</strong> Authentifiez-vous SVP.
+                </div>
+            </div>
+
+            <div class="message">
+                <a class="link" [routerLink]="'/login'">Retourner à la page d'autentification</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

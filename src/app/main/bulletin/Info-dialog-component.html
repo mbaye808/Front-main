@@ -1,0 +1,45 @@
+    
+   
+
+    <div class="modal-body ">
+        
+    
+    <div class="table-wrapper-scroll-y">
+        <table class="table table-bordered table-hover" >
+            <tbody>
+                <div *ngFor="let note of notes">
+                    <div *ngFor="let unite of note.noteUnite">
+                        <tr>
+                            <td width=54%> <B>Elément Constitutif</B> </td>
+                            <td width=7%> <B>Coef</B> </td>
+                            <td width=7%> <B>TP</B> </td>
+                            <td width=9% > <B>CC</B> </td>
+                            <td width=9% > <B>DS</B> </td>
+                            <td width=14%> <B>Moyenne</B> </td>
+                        </tr>
+                        <tr *ngFor="let note of unite.notes">
+                            <td width=54%> {{note.historiqueElementContitutif.intitule}} </td>
+                            <td width=7%>{{note.historiqueElementContitutif.coeff}}</td>
+                            <td width=7%>{{note?.note?.tp}}</td>
+                            <td width=9%>{{note?.note?.cc}}</td>
+                            <td width=9%>{{note?.note?.ds}}</td>
+                            <td  width=14% > <span *ngIf="note.note.moyenne">{{note?.note?.moyenne.toFixed(2)}}</span> </td>
+                        </tr>
+                        <tr>
+                            <td> <B>{{unite.historiqueUniteEnseignement.intitules}}</B> </td>
+                            <td colspan="2"><B> Credit: {{unite.historiqueUniteEnseignement.credit}}</B></td>
+                            <td colspan="2"><B> Moyenne: {{unite?.moyenne}}</B></td>
+                            <td> <B>{{unite.absence}} Absence(s) </B></td>
+                        </tr>
+                    </div>
+                    <br>
+                    <br>
+                    <div>
+                        <B> Moyenne  Semestre {{note.moyenne}}</B>
+                    </div>
+                </div>
+            </tbody>
+        </table>
+    </div>
+
+   
