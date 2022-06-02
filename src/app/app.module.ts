@@ -48,16 +48,24 @@ import { EcommerceRouterModule } from './main/orders/order-routing';
  const appRoutes: Routes = [
     {
         path      : '**',
+        redirectTo: 'home'
+        
+    },
+    {
+        path      : '**',
         redirectTo: 'log'
-    },/*
+        
+    },
+    {
+        path      : '**',
+        redirectTo: 'reg'
+        
+    },
     {
         path      : '**',
         redirectTo: 'register'
     },
-    {
-        path      : '**',
-        redirectTo: 'home'
-    },
+    
     {
         path      : '**',
         redirectTo: 'bulletin'
@@ -69,7 +77,7 @@ import { EcommerceRouterModule } from './main/orders/order-routing';
     {
         path      : '**',
         redirectTo: 'order'
-    }*/
+    }
 ]; 
 
 @NgModule({

@@ -79,9 +79,10 @@ export class LoginComponent implements OnInit
                 
             })
             .subscribe(
-                () => {
+                (res) => {
                     this.authenticationError = false;
-                    this._router.navigate(['/home']);
+                   
+                     this._router.navigate(['/home']);
                     if (
                         this._router.url.startsWith('/account/register') ||
                         this._router.url.startsWith('/account/activate') ||
@@ -91,7 +92,9 @@ export class LoginComponent implements OnInit
                     }
                 },
                 () => (this.authenticationError = true)
+                
             );
+
     }
 
 }

@@ -20,17 +20,10 @@ export class AuthServerProvider {
     return this.$localStorage.retrieve('authenticationToken') || this.$sessionStorage.retrieve('authenticationToken') || '';
   }
 
-  login(credentials: Login): Observable<void> {
-    const data =
-      `username=${encodeURIComponent(credentials.username)}` +
-      `&password=${encodeURIComponent(credentials.password)}` +
-      `&remember-me=${credentials.rememberMe}` +
-      '&submit=Login';
-
-    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+  login(credentials: Login): Observable<any> {
     return this.http
-      .post<JwtToken>(SERVER_API_URL + 'loginAuth', credentials)
-      .pipe(map(response => this.authenticateSuccess(response, credentials.rememberMe)));
+      .post<any>(SERVER_API_URL + 'loginAuth', credentials)
+      .pipe(map(response => {this.authenticateSuccess(response, credentials.rememberMe)})); 
   }
 
   logout(): Observable<void> {
@@ -41,12 +34,10 @@ export class AuthServerProvider {
     });
   }
 
-  private authenticateSuccess(response: JwtToken, rememberMe: boolean): void {
-    const jwt = response.id_token;
-    if (rememberMe) {
-      this.$localStorage.store('authenticationToken', jwt);
-    } else {
+  private authenticateSuccess(response: any, rememberMe: boolean): void {
+    const jwt = response.token;
       this.$sessionStorage.store('authenticationToken', jwt);
-    }
+      console.log( this.$sessionStorage.retrieve('authenticationToken'))
+    
   }
 }

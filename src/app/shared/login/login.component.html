@@ -45,8 +45,8 @@
                     </a>
                 </div>
 
-                <button mat-raised-button color="accent" class="submit-button" aria-label="LOG IN"
-                        [disabled]="loginForm.invalid" [routerLink]="'/home'">
+                <button (click)="login()" mat-raised-button color="accent" class="submit-button" aria-label="LOG IN"
+                        [disabled]="loginForm.invalid">
                     LOGIN
                 </button>
                 

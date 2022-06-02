@@ -39,7 +39,7 @@ export class AccountService {
   }
 
   identity(force?: boolean): Observable<Account | null> {
-    if (!this.accountCache$ || force || !this.isAuthenticated()) {
+     if (!this.accountCache$ || force || !this.isAuthenticated()) {
       this.accountCache$ = this.fetch().pipe(
         catchError(() => {
           return of(null);
@@ -53,7 +53,7 @@ export class AccountService {
         }),
         shareReplay()
       );
-    }
+    } 
     return this.accountCache$;
   }
 
@@ -70,6 +70,7 @@ export class AccountService {
   }
 
   private fetch(): Observable<Account> {
+    
     return this.http.get<Account>(SERVER_API_URL + 'api/account');
   }
 

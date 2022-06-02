@@ -12,7 +12,8 @@ export class LoginService {
   constructor(private accountService: AccountService, private authServerProvider: AuthServerProvider) {}
 
   login(credentials: Login): Observable<Account | null> {
-    return this.authServerProvider.login(credentials).pipe(flatMap(() => this.accountService.identity(true)));
+    return this.authServerProvider.login(credentials)
+    // .pipe(flatMap(() => this.accountService.identity(true)));
   }
 
   logout(): void {

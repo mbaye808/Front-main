@@ -11,7 +11,7 @@ export interface Locale
     providedIn: 'root'
 })
 export class FuseTranslationLoaderService
-{
+{ 
     /**
      * Constructor
      *
