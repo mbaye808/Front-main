@@ -56,11 +56,7 @@ import { EcommerceRouterModule } from './main/orders/order-routing';
         redirectTo: 'log'
         
     },
-    {
-        path      : '**',
-        redirectTo: 'reg'
-        
-    },
+   
     {
         path      : '**',
         redirectTo: 'register'
