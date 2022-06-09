@@ -7,6 +7,7 @@ import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
 
 import { Login } from 'app/core/login/login.model';
 import { SERVER_API_URL } from '../../app.constants';
+import { Router } from '@angular/router';
 
 type JwtToken = {
   id_token: string;
@@ -14,30 +15,35 @@ type JwtToken = {
 
 @Injectable({ providedIn: 'root' })
 export class AuthServerProvider {
-  constructor(private http: HttpClient, private $localStorage: LocalStorageService, private $sessionStorage: SessionStorageService) {}
+  clear() {
+      throw new Error('Method not implemented.');
+  }
+  constructor(private _router: Router, private http: HttpClient, private $localStorage: LocalStorageService, private $sessionStorage: SessionStorageService) {}
 
   getToken(): string {
-    return this.$localStorage.retrieve('authenticationToken') || this.$sessionStorage.retrieve('authenticationToken') || '';
+    return this.$localStorage.retrieve('authenticationtoken') || this.$sessionStorage.retrieve('authenticationtoken') || '';
   }
 
   login(credentials: Login): Observable<any> {
     return this.http
       .post<any>(SERVER_API_URL + 'loginAuth', credentials)
       .pipe(map(response => {this.authenticateSuccess(response, credentials.rememberMe)})); 
+      
   }
-
   logout(): Observable<void> {
     return new Observable(observer => {
-      this.$localStorage.clear('authenticationToken');
-      this.$sessionStorage.clear('authenticationToken');
+      this.$localStorage.clear('authenticationtoken');
+      this.$sessionStorage.clear('authenticationtoken');
       observer.complete();
+     // this._router.navigate(['/accueil'])
     });
   }
 
   private authenticateSuccess(response: any, rememberMe: boolean): void {
     const jwt = response.token;
-      this.$sessionStorage.store('authenticationToken', jwt);
-      console.log( this.$sessionStorage.retrieve('authenticationToken'))
+    this.$localStorage.store('authenticationtoken', jwt);
+      this.$sessionStorage.store('authenticationtoken', jwt);
+      console.log( this.$sessionStorage.retrieve('authenticationtoken'))
     
   }
 }

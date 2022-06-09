@@ -22,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import {LoginModule} from './shared/login/login.module';
 import {HomeModule} from './main/home/home.module';
+import {AccueilModule} from './accueil/accueil.module';
 // import { EtudiantRoutingModule } from './main/etudiant/etudiant-routing.module';
 // import {  Jtest5EtudiantModule } from './main/etudiant/etudiant.module';
 import { DemandeRoutingModule } from './main/demande/demande-routing.module';
@@ -46,6 +47,11 @@ import { EcommerceModule } from './main/orders/orders.module';
 import { EcommerceRouterModule } from './main/orders/order-routing';
 
  const appRoutes: Routes = [
+    {
+        path      : '**',
+        redirectTo: 'accueil'
+        
+    },
     {
         path      : '**',
         redirectTo: 'home'
@@ -120,6 +126,7 @@ import { EcommerceRouterModule } from './main/orders/order-routing';
         Jtest5CoreModule,
         LoginModule,
         HomeModule,
+        AccueilModule,
         MailConfirmModule 
     ],
     bootstrap   : [

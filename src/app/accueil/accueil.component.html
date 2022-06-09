@@ -1,0 +1,78 @@
+
+<nav>
+    <img src="assets/images/logos/logo.png" style="width: 15%; margin-left: -80px; margin-top: 20px;" alt="logo">
+    <span style="margin-left: -80px;">Ecole Superieure Polytechnique</span>
+    <ul>
+        <li><a href="#" [routerLink]="'/log'">Connexion</a></li>
+        <!-- <li><a href="#" [routerLink]="'/register'">Inscription</a></li> -->
+    </ul>
+
+
+ <div id="academy-courses" class="page-layout simple"> 
+
+    <!-- HEADER -->
+    <div class="header accent p-16 p-sm-24" fxLayout="column" fxLayoutAlign="center center">
+
+        <div class="hero-text">
+            <!-- <mat-icon class="hero-icon">school</mat-icon> -->
+            <h1 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+                Bienvenue dans l'ENT du PGI
+            </h1>
+            <h3 [@animate]="{value:'*',params:{delay:'100ms', y:'25px'}}">
+                Connectez-vous pour retrouver les différents applications à votre disposition
+            </h3>
+        </div>
+
+    </div>
+    <!-- / HEADER -->
+    <!-- CONTENT -->
+    <div class="content p-24">
+
+        <div fxLayout="column" fxLayoutAlign="center">
+
+            <div class="filters" fxLayout="column" fxLayoutAlign="center center"
+                 fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
+
+            </div>
+
+            <div class="courses" fxLayout="row wrap" fxLayoutAlign="center" [@animateStagger]="{value:'50'}">
+
+                <div class="course" *ngFor="let module of modules" fxFlex="100" fxFlex.gt-xs="50"
+                     fxFlex.gt-sm="25" [ngClass]="module" [@animate]="{value:'*',params:{y:'100%'}}">
+
+                    <div class="course-content" fxLayout="column" fxFlex="1 1 auto">
+
+                        <div class="header" fxLayout="row" fxLayoutAlign="center center"
+                             [ngClass]="module + '-bg'">
+
+                            <div class="category" fxFlex>
+                                {{module.titre}}
+                            </div>
+
+                        </div>
+
+                        <div class="content" fxLayout="column" fxLayoutAlign="center center" fxFlex="1 1 auto">
+                            <div class="h1">{{module.libelle}}</div>
+
+                        </div>
+
+                        <div class="footer" fxLayout="row" fxLayoutAlign="center center">
+                            <button mat-button color="accent" [routerLink]="'/log'">
+                                voir
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>
+</nav>
