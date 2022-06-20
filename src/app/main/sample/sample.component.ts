@@ -71,7 +71,7 @@ export class SampleComponent implements OnInit
         dialogRef.componentInstance.reclamation=reclamation;
     }
     ngOnInit() {
-        this.anneeAcademiqueService.query().subscribe((res: HttpResponse<IAnneeAcademique[]>) => (this.anneeAccademiques = res.body || []));
+        //this.anneeAcademiqueService.query().subscribe((res: HttpResponse<IAnneeAcademique[]>) => (this.anneeAccademiques = res.body || []));
         this.semestreService.session().subscribe((res: HttpResponse<ISemestre[]>) => (this.sessions = res.body || []));
     }
     getGroupeEtudiant(){

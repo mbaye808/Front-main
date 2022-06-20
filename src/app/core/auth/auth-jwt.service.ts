@@ -15,9 +15,6 @@ type JwtToken = {
 
 @Injectable({ providedIn: 'root' })
 export class AuthServerProvider {
-  clear() {
-      throw new Error('Method not implemented.');
-  }
   constructor(private _router: Router, private http: HttpClient, private $localStorage: LocalStorageService, private $sessionStorage: SessionStorageService) {}
 
   getToken(): string {
@@ -35,7 +32,6 @@ export class AuthServerProvider {
       this.$localStorage.clear('authenticationtoken');
       this.$sessionStorage.clear('authenticationtoken');
       observer.complete();
-     // this._router.navigate(['/accueil'])
     });
   }
 

@@ -49,7 +49,7 @@ import { EcommerceRouterModule } from './main/orders/order-routing';
  const appRoutes: Routes = [
     {
         path      : '**',
-        redirectTo: 'accueil'
+        redirectTo: ''
         
     },
     {

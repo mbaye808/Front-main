@@ -9,6 +9,7 @@ import { shareReplay, tap, catchError } from 'rxjs/operators';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
 // import { Http } from '@angular/http';
 import { SERVER_API_URL } from 'app/app.constants';
+import { User } from '../user/user.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -72,6 +73,12 @@ export class AccountService {
   private fetch(): Observable<Account> {
     
     return this.http.get<Account>(SERVER_API_URL + 'api/account');
+  }
+
+
+  public userConnecter(): Observable<User> {
+    
+    return this.http.get<User>(SERVER_API_URL + '/userConnecter');
   }
 
   private navigateToStoredUrl(): void {

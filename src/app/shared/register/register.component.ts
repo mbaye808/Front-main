@@ -74,8 +74,9 @@ export class RegisterComponent implements OnInit, OnDestroy
         this._unsubscribeAll = new Subject();
     }
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+   
   }
+
 
     // -----------------------------------------------------------------------------------------------------
     // @ Lifecycle hooks
@@ -94,7 +95,7 @@ export class RegisterComponent implements OnInit, OnDestroy
             // email          : ['', [Validators.required, Validators.email]],
             // password       : ['', Validators.required],
             // passwordConfirm: ['', [Validators.required, confirmPasswordValidator]]
-            login: [
+            /* login: [
                 '',
                 [
                   Validators.required,
@@ -102,7 +103,7 @@ export class RegisterComponent implements OnInit, OnDestroy
                   Validators.maxLength(50),
                   Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
                 ],
-              ],
+              ], */
               dateNaiss: [
                 '',
                 [
@@ -157,7 +158,7 @@ private createUser(): User{
   return{
     ...new User(),
     id: null,
-    username: this.registerForm.get(['login'])!.value,
+    // username: this.registerForm.get(['login'])!.value,
     firstName: this.registerForm.get(['firstName'])!.value,
     lastName: this.registerForm.get(['lastName'])!.value,
     ine: this.registerForm.get(['ine'])!.value,
@@ -181,7 +182,7 @@ register(){
   error => {
     alert("echec, verifier vos information");
   this.msg=error.error;
-},()=>  this._router.navigate(['/log']))  
+})//()=>  this._router.navigate(['/log']))  
   
 }
 

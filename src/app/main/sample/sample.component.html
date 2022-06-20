@@ -25,12 +25,12 @@
             <!-- CONTENT -->
             
             <div fxLayout="row" fxLayoutAlign="start" fxFlex="1 0 auto" style="font-size:20px">
-                <div fxFlex="30"  > 
+              <!--   <div fxFlex="30"  > 
                 <label  for="field_groupe"><B>AnneeAccademique</B></label>
                     <select id="field_groupe" name="anneeAccademique" [(ngModel)]="anneeAccademique"  required (ngModelChange)= "getGroupeEtudiant()" >
                         <option [ngValue]="anneeAccademiqueOption" *ngFor="let anneeAccademiqueOption of anneeAccademiques">{{anneeAccademiqueOption.nomAnneeAccademique}}</option>
                     </select> 
-                </div>
+                </div> -->
             <div fxFlex="30"  > 
                 <label class="form-control-label" for="field_groupe"><B>Classe</B></label>
                     <select class="form-control-lg" id="field_groupe" name="classe" [(ngModel)]="classe"  required (ngModelChange)= "getSemestres()" >

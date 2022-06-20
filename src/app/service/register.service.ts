@@ -22,6 +22,7 @@ export class RegisterService {
   public registerUserFromRemote(user: User):Observable<any>{
 
     return this._http.post<any>("http://localhost:8080/register",user)
+    
   
   }
    protected convertDateFromClient(etudiant: IEtudiant): IEtudiant {

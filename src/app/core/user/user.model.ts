@@ -2,7 +2,7 @@ import { Collection } from "lodash";
 
 export interface IUser {
   id?: any;
-  username?: string;
+  // username?: string;
   firstName?: string;
   lastName?: string;
   email?: string;
@@ -14,7 +14,7 @@ export interface IUser {
 export class User implements IUser {
   constructor(
     public id?: any,
-    public username?: string,
+    // public username?: string,
     public firstName?: string,
     public lastName?: string,
     public email?: string,

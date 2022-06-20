@@ -8,6 +8,7 @@ import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
 import { IInscription } from 'app/shared/model/inscription.model';
+import { User } from 'app/core/user/user.model';
 
 type EntityResponseType = HttpResponse<IInscription>;
 type EntityArrayResponseType = HttpResponse<IInscription[]>;
@@ -15,6 +16,7 @@ type EntityArrayResponseType = HttpResponse<IInscription[]>;
 @Injectable({ providedIn: 'root' })
 export class InscriptionService {
   public resourceUrl = SERVER_API_URL + 'api/inscriptions';
+  public resourceUr2 = SERVER_API_URL + 'api/userConnecter';
 
   constructor(protected http: HttpClient) {}
 
@@ -64,7 +66,7 @@ export class InscriptionService {
     return res;
   }
 
-  protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
+  protected convertDateArrayFromServer(res: any): any {
     if (res.body) {
       res.body.forEach((inscription: IInscription) => {
         inscription.dateInscription = inscription.dateInscription ? moment(inscription.dateInscription) : undefined;
@@ -72,4 +74,17 @@ export class InscriptionService {
     }
     return res;
   }
+
+  /* userConnecter(): Observable<EntityResponseType> {
+    return this.http
+      .get<User>(`${this.resourceUr2}`, { observe: 'response' })
+      .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
+
+  } */
+
+  listGroupeInscrit(): Observable<any> {
+    return this.http
+      .get<any>(`${this.resourceUrl}/findByGroupeAndAnneeAcademique`, { observe: 'response' })
+  }
+  
 }

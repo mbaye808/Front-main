@@ -15,8 +15,8 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit
 {
-    @ViewChild('username', { static: false })
-    username?: ElementRef;
+    @ViewChild('email', { static: false })
+    email?: ElementRef;
     loginForm: FormGroup;
     authenticationError = false;
 
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit
         private _fuseConfigService: FuseConfigService,
         private _formBuilder: FormBuilder,
         private _loginService: LoginService,
-        private _router: Router
+        private _router: Router,
     )
     {
         // Configure the layout
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit
     ngOnInit(): void
     {
         this.loginForm = this._formBuilder.group({
-            username   : ['', [Validators.required]],
+            email  : ['', [Validators.required]],
             password: ['', Validators.required],
             rememberMe: [false]
         });
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit
     login(): void {
         this._loginService
             .login({
-                username: this.loginForm.get('username')!.value,
+                email: this.loginForm.get('email')!.value,
                 password: this.loginForm.get('password')!.value,
                 rememberMe: this.loginForm.get('rememberMe')!.value,
 
@@ -91,7 +91,10 @@ export class LoginComponent implements OnInit
                         this._router.navigate(['/cours']);
                     }
                 },
-                () => (this.authenticationError = true)
+                () => {(this.authenticationError = true)
+                
+                alert("Email ou mot de passe incorrectes");
+                }
                 
             );
 

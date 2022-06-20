@@ -4,7 +4,7 @@ import { AccueilComponent } from './accueil.component';
 
 const routes: Routes = [
   {
-    path     : 'accueil',
+    path     : '',
     component: AccueilComponent
 }
 ];
