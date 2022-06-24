@@ -3,13 +3,14 @@ import { Account } from './../user/account.model';
 
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, ReplaySubject, of } from 'rxjs';
 import { shareReplay, tap, catchError } from 'rxjs/operators';
 import { StateStorageService } from 'app/core/auth/state-storage.service';
 // import { Http } from '@angular/http';
 import { SERVER_API_URL } from 'app/app.constants';
 import { User } from '../user/user.model';
+import { AuthServerProvider } from './auth-jwt.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -18,7 +19,7 @@ export class AccountService {
   private authenticationState = new ReplaySubject<Account | null>(1);
   private accountCache$?: Observable<Account | null>;
 
-  constructor(private http: HttpClient, private stateStorageService: StateStorageService, private router: Router) {}
+  constructor(private http: HttpClient, private stateStorageService: StateStorageService, private router: Router,private authServerProvider:AuthServerProvider) {}
 
   save(account: Account): Observable<{}> {
     return this.http.post(SERVER_API_URL + 'api/account', account);
@@ -78,7 +79,7 @@ export class AccountService {
 
   public userConnecter(): Observable<User> {
     
-    return this.http.get<User>(SERVER_API_URL + '/userConnecter');
+    return this.http.get<User>(SERVER_API_URL + 'userConnecter',{headers:new HttpHeaders().set('CreAuthorization','Bearer ' +this.authServerProvider.getToken())});
   }
 
   private navigateToStoredUrl(): void {

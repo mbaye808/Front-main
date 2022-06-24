@@ -29,7 +29,7 @@ import { NotificationInterceptor } from 'app/blocks/interceptor/notification.int
             useValue: 'en',
         },
         DatePipe,
-       /*  {
+        {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true,
@@ -48,7 +48,7 @@ import { NotificationInterceptor } from 'app/blocks/interceptor/notification.int
             provide: HTTP_INTERCEPTORS,
             useClass: NotificationInterceptor,
             multi: true,
-        }, */
+        }, 
     ],
 })
 export class Jtest5CoreModule {

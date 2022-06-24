@@ -12,7 +12,7 @@ type EntityArrayResponseType = HttpResponse<IClasse[]>;
 
 @Injectable({ providedIn: 'root' })
 export class ClasseService {
-  public resourceUrl = SERVER_API_URL + 'api/groupes';
+  public resourceUrl = SERVER_API_URL + 'api/';
 
   constructor(protected http: HttpClient) {}
 
@@ -36,8 +36,8 @@ export class ClasseService {
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
-  getClasse(id: number): Observable<EntityArrayResponseType> {
-    return this.http.get<IClasse[]>(`${this.resourceUrl}/getGroupeInscriptionByEtudiant/${id}`, { observe: 'response' });
+  getClasse(): Observable<EntityArrayResponseType> {
+    return this.http.get<IClasse[]>(`${this.resourceUrl}inscriptions/findByGroupeAndAnneeAcademique`, { observe: 'response' });
   }
 
 }

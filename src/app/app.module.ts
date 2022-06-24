@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
@@ -45,6 +45,8 @@ import { CalendrierRoutingModule } from './main/calendar/calendrier-routing';
 import { CalendarModule } from './main/calendar/calendar.module';
 import { EcommerceModule } from './main/orders/orders.module';
 import { EcommerceRouterModule } from './main/orders/order-routing';
+import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
+import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
 
  const appRoutes: Routes = [
     {
@@ -86,6 +88,15 @@ import { EcommerceRouterModule } from './main/orders/order-routing';
     declarations: [
         AppComponent
     ],
+  /*   providers:[
+
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true
+        }
+
+    ], */
     imports     : [
         BrowserModule,
         BrowserAnimationsModule,

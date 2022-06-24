@@ -19,6 +19,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { Reclamation } from '../../shared/model/reclamation.model';
 import * as moment from 'moment';
 import { ContactsContactFormDialogComponent } from './contact-form/contact-form.component';
+import { Account } from 'app/core/user/account.model';
+import { User } from 'app/core/user/user.model';
+import { AccountService } from 'app/core/auth/account.service';
 
 @Component({
     selector   : 'sample',
@@ -27,7 +30,7 @@ import { ContactsContactFormDialogComponent } from './contact-form/contact-form.
 })
 export class SampleComponent implements OnInit
 {
-    notes:any[];
+    notes:any;
      notes2:Note[];
      okey:boolean = false;
      semestre:any
@@ -37,6 +40,7 @@ export class SampleComponent implements OnInit
     session: any
     sessions: any
     anneeAccademique: AnneeAcademique
+    account: User
     anneeAccademiques: AnneeAcademique[]
     dialogRef: any;
     
@@ -48,7 +52,8 @@ export class SampleComponent implements OnInit
    
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService, protected anneeAcademiqueService: AnneeAcademiqueService, protected semestreService: SemestreService,
-        protected classeEt: ClasseService,private _matDialog: MatDialog
+        protected classeEt: ClasseService,private _matDialog: MatDialog,
+        private accountService: AccountService
     )
     {
         this._fuseTranslationLoaderService.loadTranslations(english, turkish);
@@ -72,19 +77,32 @@ export class SampleComponent implements OnInit
     }
     ngOnInit() {
         //this.anneeAcademiqueService.query().subscribe((res: HttpResponse<IAnneeAcademique[]>) => (this.anneeAccademiques = res.body || []));
-        this.semestreService.session().subscribe((res: HttpResponse<ISemestre[]>) => (this.sessions = res.body || []));
+       // this.semestreService.session().subscribe((res: HttpResponse<ISemestre[]>) => (this.sessions = res.body || []));
+      
+       this.accountService.userConnecter().subscribe((account)=>{
+        this.account=account;
+        this.getGroupeEtudiant();
+        this.semestreService.session().subscribe((res: HttpResponse<any[]>) => {this.sessions = res.body || [] , console.log(this.sessions)});
+    })
     }
     getGroupeEtudiant(){
-        this.classeEt.getClasse(this.anneeAccademique.id).subscribe((res: HttpResponse<IClasse[]>) => (this.classes = res.body || []));
+        // this.accountService.userConnecter().subscribe((account)=>{
+        //     this.account=account
+            this.classeEt.getClasse().subscribe((res: HttpResponse<IClasse[]>) => {this.classes = res.body || [] , console.log(this.classes)});
+        
+        
     }
     getSemestres(){
-        this.semestreService.getSemestre(this.classe.id,this.anneeAccademique.id).subscribe((res: HttpResponse<ISemestre[]>) => (this.semestres = res.body || []));
+        this.notes=[]
+        this.semestreService.getSemestre(this.classe.id).subscribe((res: HttpResponse<ISemestre[]>) => (this.semestres = res.body || []));
     }
     getNotes(){
-        this.semestreService.getsNote(this.classe.id,this.anneeAccademique.id,this.semestre,this.session.id).subscribe((res: HttpResponse<ISemestre[]>) =>{
-            this.notes = res.body || [];
+        this.notes=[]
+        this.semestreService.getsNote(this.classe.id,this.semestre,this.session.id).subscribe((res: HttpResponse<ISemestre[]>) =>{
+            this.notes = res.body ;
             console.log(res.body)
         } ); 
     }
+    
 }
   

@@ -15,13 +15,15 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     const token = this.localStorage.retrieve('authenticationToken') || this.sessionStorage.retrieve('authenticationToken');
+   
     if (token) {
       request = request.clone({
         setHeaders: {
-          Authorization: 'Bearer ' + token,
+          CreAuthorization:`Bearer ${token}`,
         },
       });
     }
+    console.log(request,"dsedeeef")
     return next.handle(request);
   }
 }

@@ -178,11 +178,12 @@ register(){
   this._service.registerUserFromRemote(this.user).subscribe(
     data => {
     alert("Compte créé avec succés");
+
   },
   error => {
     alert("echec, verifier vos information");
   this.msg=error.error;
-})//()=>  this._router.navigate(['/log']))  
+},()=>  this._router.navigate(['/log']))  
   
 }
 

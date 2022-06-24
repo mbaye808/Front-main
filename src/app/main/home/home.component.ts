@@ -10,11 +10,11 @@ import {fuseAnimations} from '../../../@fuse/animations';
 export class HomeComponent implements OnInit {
     modules?: any[] = [
         {
-         'titre' :  'Gestion des Cours',
+         'titre' :  'Gestion des demandes',
          'libelle' : 'Ce module contient tout ce qui est relatif aux cours'
         },
         {
-            'titre' :  'Gestion des Absences',
+            'titre' :  'Gestion des Reclamations',
             'libelle' : 'Ce module contient tout ce qui est relatif aux absences'
         },
         {

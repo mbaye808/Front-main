@@ -35,7 +35,7 @@
                 <label class="form-control-label" for="field_groupe"><B>Classe</B></label>
                     <select class="form-control-lg" id="field_groupe" name="classe" [(ngModel)]="classe"  required (ngModelChange)= "getSemestres()" >
                         <option [ngValue]="null" selected></option>
-                        <option [ngValue]="groupeOption" *ngFor="let groupeOption of classes">{{groupeOption.libelle}}</option>
+                        <option [ngValue]="groupeOption" *ngFor="let groupeOption of classes">{{groupeOption.code}}</option>
                     </select>
                     </div>
                 <div *ngIf="classe" fxFlex="30"   >
@@ -54,12 +54,13 @@
                         </select>
                     </div>
                 </div> 
-   
+   <br>
+   <br>
        <div >
-            <table class="table table-bordered table-hover" >
+            <table class="table table-bordered table-hover"  *ngIf="notes">
                 <tbody>
-                    <div *ngFor="let note of notes">
-                        <div *ngFor="let unite of note.noteUnite">
+                    <div *ngFor="let note of notes.toutues">
+                       
                             <tr>
                                 <td width=54%> <B>Elément Constitutif</B> </td>
                                 <td width=7%> <B>Coef</B> </td>
@@ -69,27 +70,23 @@
                                 <td width=14%> <B>Moyenne</B> </td>
                                 <td width=14%> <B>Reclamation</B> </td>
                             </tr> 
-                            <tr *ngFor="let note of unite.notes">
-                                <td width=54%> {{note.historiqueElementContitutif.intitule}} </td>
-                                <td width=7%>{{note.historiqueElementContitutif.coeff}}</td>
-                                <td width=7%>{{note?.note?.tp}}</td>
-                                <td width=9%>{{note?.note?.cc}}</td>
-                                <td width=9%>{{note?.note?.ds}}</td>
-                                <td  width=14% > <span *ngIf="note.note.moyenne">{{note?.note?.moyenne.toFixed(2)}}</span> </td>
-                                <td width=20% ><button type="button" class="btn btn-primary btn-sm" (click)="newContact(note.historiqueElementContitutif,note?.note)" >RECLAMER</button></td>
+                            <tr *ngFor="let not of note.provisoirs">
+                                <td width=54%> {{not.intitule}} </td>
+                                <td width=7%>{{not.coefficient}}</td>
+                                <td width=7%>{{not?.tp}}</td>
+                                <td width=9%>{{not?.cc}}</td>
+                                <td width=9%>{{not?.ds}}</td>
+                                <td  width=14% > <span *ngIf="not.moyenne">{{not?.moyenne.toFixed(2)}}</span> </td>
+                                <td width=20% ><button type="button" class="btn btn-primary btn-sm" (click)="newContact(not.historiqueElementContitutif,not?.note)" >RECLAMER</button></td>
                             </tr>
                             <tr>
-                                <td> <B>{{unite.historiqueUniteEnseignement.intitules}}</B> </td>
-                                <td colspan="2"><B> Credit: {{unite.historiqueUniteEnseignement.credit}}</B></td>
-                                <td colspan="2"><B> Moyenne: {{unite?.moyenne}}</B></td>
-                                <td> <B>{{unite.absence}} Absence(s) </B></td>
+                                <td> <B>{{note.historiqueUniteEnseignement.intitules}}</B> </td>
+                                <td colspan="2"><B> Credit: {{note.historiqueUniteEnseignement.credit}}</B></td>
+                                <td colspan="2"><B> Moyenne: {{note?.moyenneUE}}</B></td>
+                                <td> <B>{{note.absence}} Absence(s) </B></td>
                             </tr>
-                        </div>
-                        <br>
-                        <br>
-                        <div>
-                            <B> Moyenne  Semestre {{note.moyenne}}</B>
-                        </div>
+                    
+                        
                     </div>
                 </tbody>
             </table>

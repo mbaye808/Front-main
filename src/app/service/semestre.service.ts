@@ -13,9 +13,9 @@ type EntityArrayResponseType = HttpResponse<ISemestre[]>;
 
 @Injectable({ providedIn: 'root' })
 export class SemestreService {
-  public resourceUrl = SERVER_API_URL + 'api/semestres';
+  public resourceUrl = SERVER_API_URL + 'api';
   public sessionUrl = SERVER_API_URL + 'api/sessions';
-  public noteUrl = SERVER_API_URL + 'api/notes';
+  public noteUrl = SERVER_API_URL + 'api';
   constructor(protected http: HttpClient) {}
 
 //   create(semestre: ISemestre): Observable<EntityResponseType> {
@@ -30,9 +30,9 @@ export class SemestreService {
 //     return this.http.get<ISemestre>(`${this.resourceUrl}/${id}`, { observe: 'response' });
 //   }
 
-  getSemestre(idgroupe: number, idanne: number): Observable<EntityArrayResponseType> {
+  getSemestre(idgroupe: number): Observable<EntityArrayResponseType> {
     
-    return this.http.get<ISemestre[]>(`${this.resourceUrl}/getSemestresbyNiveau/${idgroupe}/${idanne}`, { observe: 'response' });
+    return this.http.get<ISemestre[]>(`${this.resourceUrl}/semestres/getSemestresbyNiveau/${idgroupe}`, { observe: 'response' });
   }
 
   session(req?: any): Observable<EntityArrayResponseType> {
@@ -40,9 +40,9 @@ export class SemestreService {
     return this.http.get<any[]>(this.sessionUrl, { params: options, observe: 'response' });
   }
 
-  getsNote(idgroupe: number, idanne: number, idsemestre: number, idsession:number): Observable<EntityArrayResponseType> {
+  getsNote(idgroupe: number, idsemestre: number, idsession:number): Observable<any> {
     
-    return this.http.get<Note[]>(`${this.noteUrl}/listeNotes/${idgroupe}/${idanne}/${idsemestre}/${idsession}`, { observe: 'response' });
+    return this.http.get<any>(`${this.noteUrl}/notes/getNotesByUniteEnseignement/${idgroupe}/${idsemestre}/${idsession}`, { observe: 'response' });
   }
 //   delete(id: number): Observable<HttpResponse<{}>> {
 //     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
