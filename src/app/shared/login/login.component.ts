@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit
     email?: ElementRef;
     loginForm: FormGroup;
     authenticationError = false;
+    
 
     /**
      * Constructor

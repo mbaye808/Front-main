@@ -1,11 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
+import * as moment from 'moment';
+import { map } from 'rxjs/operators';
 
-@Injectable()
+
+
+@Injectable({ providedIn: 'root' })
 export class CalendarService implements Resolve<any>
 {
+    private baseURL = "http://localhost:8080/api/seances/findByNiveau";
     events: any;
     onEventsUpdated: Subject<any>;
 
@@ -40,7 +45,7 @@ export class CalendarService implements Resolve<any>
                 this.getEvents()
             ]).then(
                 ([events]: [any]) => {
-                    resolve();
+                  
                 },
                 reject
             );
@@ -83,5 +88,19 @@ export class CalendarService implements Resolve<any>
                 }, reject);
         });
     }
-
+    getEmploiDT(date: any): Observable<HttpResponse<any[]>> {
+            console.log(date)
+            return this._httpClient.get<any[]>(`${this.baseURL}/${date}`, { observe: 'response' })
+            .pipe(map((res: HttpResponse<any[]>) => this.convertDateArrayFromServerserveur(res)));
+       }
+       protected convertDateArrayFromServerserveur(res: HttpResponse<any[]>): HttpResponse<any[]> {
+        if (res.body) {
+          res.body.forEach(seance => {
+            seance.heureDebut = seance.heureDebut != null ? moment(seance.heureDebut) : undefined;
+            seance.heureFin = seance.heureFin != null ? moment(seance.heureFin) : undefined;
+          });
+         
+        }
+        return res;
+      }
 }

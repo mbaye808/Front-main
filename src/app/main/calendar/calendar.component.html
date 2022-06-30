@@ -29,20 +29,20 @@
                         mwlCalendarPreviousView
                         [view]="view"
                         [(viewDate)]="viewDate"
-                        (viewDateChange)="selectedDay = {date:$event}"
+                        (viewDateChange)="emploiDuTp()"
                         aria-label="Previous">
                     <mat-icon>chevron_left</mat-icon>
                 </button>
 
                 <div class="title">
-                    {{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}
+                    {{ viewDate | calendarDate:(view + 'ViewTitle'):'fr' }}
                 </div>
 
                 <button mat-icon-button class="arrow"
                         mwlCalendarNextView
                         [view]="view"
                         [(viewDate)]="viewDate"
-                        (viewDateChange)="selectedDay = {date:$event}"
+                        (viewDateChange)="emploiDuTp()"
                         aria-label="Next">
                     <mat-icon>chevron_right</mat-icon>
                 </button>
@@ -62,8 +62,7 @@
                 
                 [viewDate]="viewDate"
                 [events]="events"
-                [refresh]="refresh"
-                
+                [weekStartsOn]="weekStartsOn"
                 [dayStartHour]="8"
                 [dayEndHour]="21"
                 [locale]="'fr'"

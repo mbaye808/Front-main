@@ -16,7 +16,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseConfirmDialogModule } from '@fuse/components';
 
-import { CalendarService } from '../../service/calendar.service';
+import { CalendarService } from './calendar.service';
 import { CalendarComponent } from './calendar.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';

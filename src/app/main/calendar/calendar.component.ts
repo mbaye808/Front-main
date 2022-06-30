@@ -1,16 +1,18 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject } from 'rxjs';
 import { startOfDay, isSameDay, isSameMonth } from 'date-fns';
-import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarMonthViewDay } from 'angular-calendar';
+import { CalendarDateFormatter, CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarMonthViewDay, DAYS_OF_WEEK } from 'angular-calendar';
 import * as moment from 'moment';
 import { FuseConfirmDialogComponent } from '@fuse/components/confirm-dialog/confirm-dialog.component';
 
 import { CalendarEventModel } from './event.model';
-import { CalendarService } from '../../service/calendar.service';
+import { CalendarService } from './calendar.service';
 import { fuseAnimations } from '../../../@fuse/animations';
+import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { getHours } from 'date-fns/esm';
+import { DatePipe } from '@angular/common';
 moment.lang('fr');
 
 
@@ -19,7 +21,13 @@ moment.lang('fr');
     templateUrl  : './calendar.component.html',
     styleUrls    : ['./calendar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    animations   : fuseAnimations
+    animations   : fuseAnimations,
+    providers:[
+        {
+            provide:CalendarDateFormatter,
+            useClass:CustomDateFormatter
+        }
+    ]
 }) 
 export class CalendarComponent implements OnInit
 {
@@ -27,16 +35,19 @@ export class CalendarComponent implements OnInit
     activeDayIsOpen: boolean;
     confirmDialogRef: MatDialogRef<FuseConfirmDialogComponent>;
     dialogRef: any;
-    events: CalendarEvent[];
-    refresh: Subject<any> = new Subject();
+    events: CalendarEvent[]=[];
+  
     selectedDay: any; 
     view: string;
     viewDate: Date;
     excludeDays : number[]=[0];
+    weekStartsOn: number= DAYS_OF_WEEK.MONDAY
      
     constructor(
         private _matDialog: MatDialog,
-        private _calendarService: CalendarService
+        private _calendarService: CalendarService,
+        private cdr:ChangeDetectorRef,
+        private datepipe:DatePipe,
     )
     {
         // Set the defaults
@@ -67,14 +78,69 @@ export class CalendarComponent implements OnInit
      */
     ngOnInit(): void
     {
+        this.emploiDuTp()
         /**
          * Watch re-render-refresh for updating db
          */
 
-        this._calendarService.onEventsUpdated.subscribe(events => {
-            this.setEvents();
-            this.refresh.next();
-        });
+    }
+    afficheedt():void{
+        console.log(this.viewDate)
+        console.log(this.datepipe.transform(this.viewDate,'yyyy-MM-dd'))
+    }
+    emploiDuTp(){
+        
+            this._calendarService.getEmploiDT(this.datepipe.transform(this.viewDate,'yyyy-MM-dd')).subscribe((data =>{
+                data.body.forEach(element => {
+                    this.events.push(this.Event(element))
+                    console.log(this.events)
+                    this.refresh();
+                });
+                console.log(data.body);
+            }))
+        
+        
+    }
+    private refresh(): void {
+        this.events = [...this.events];
+        this.cdr.detectChanges();
+      }     
+Event(seance: any): any {
+    let groupetp = '';
+    let salle = '';
+    let enseignant = '';
+
+    if (seance.groupeTdTp !== null && seance.groupeTdTp !== undefined)
+      groupetp = 'Groupe : ' + seance.groupeTdTp + '<br>';
+    if (seance.salle) salle = 'Salle: ' + seance.salle + '<br>';
+    if (seance.enseignant) enseignant = 'Enseignant: ' + seance.enseignant + '<br>';
+    else if (seance.online === 'En ligne') enseignant = 'Cours: ' + seance.online;
+    else if (seance.online === 'En ligne') salle = 'Cours: ' + seance.online;
+    return {
+      title:
+        seance.historiqueEnseignement +
+        '<br>'+
+        seance.classe+
+        '<br>'+
+        seance.enseignant+
+        '<br>'+
+        groupetp+
+        salle,
+      id: seance.id,
+      start: seance.heureDebut.toDate(),
+      end: seance.heureFin.toDate(),
+     
+
+      meta: {
+
+        texte: seance?.historiqueEnseignement + ' (' + seance.historiqueEnseignement + ')',
+      },
+    };
+  }
+
+
+    date(date: any) {
+        throw new Error('Method not implemented.');
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -135,7 +201,7 @@ export class CalendarComponent implements OnInit
             }
         }
         this.selectedDay = day;
-        this.refresh.next();
+        this.refresh();
     }
 
    
