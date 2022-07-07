@@ -18,14 +18,14 @@ import { AgmCoreModule } from '@agm/core';
 
 import { FuseSharedModule } from '@fuse/shared.module';
 import { FuseWidgetModule } from '@fuse/components/widget/widget.module';
-import { EcommerceOrdersComponent } from './orders.component';
+import { EcommerceOrdersComponent} from './orders.component';
 
 
 const routes: Routes = [
    
     {
         path     : 'orders',
-        component: EcommerceOrdersComponent,
+        component: EcommerceOrdersComponent
        
     }
 ];
@@ -33,7 +33,7 @@ const routes: Routes = [
 @NgModule({
     declarations: [
         
-        EcommerceOrdersComponent,
+        EcommerceOrdersComponent
         
     ],
     imports     : [

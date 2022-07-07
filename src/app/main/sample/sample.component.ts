@@ -22,6 +22,7 @@ import { ContactsContactFormDialogComponent } from './contact-form/contact-form.
 import { Account } from 'app/core/user/account.model';
 import { User } from 'app/core/user/user.model';
 import { AccountService } from 'app/core/auth/account.service';
+import { ReclamationComponent } from '../reclamation/reclamation.component';
 
 @Component({
     selector   : 'sample',
@@ -53,7 +54,7 @@ export class SampleComponent implements OnInit
     constructor(
         private _fuseTranslationLoaderService: FuseTranslationLoaderService, protected anneeAcademiqueService: AnneeAcademiqueService, protected semestreService: SemestreService,
         protected classeEt: ClasseService,private _matDialog: MatDialog,
-        private accountService: AccountService
+        private accountService: AccountService, private dialogRe: MatDialog
     )
     {
         this._fuseTranslationLoaderService.loadTranslations(english, turkish);
@@ -102,6 +103,9 @@ export class SampleComponent implements OnInit
             this.notes = res.body ;
             console.log(res.body)
         } ); 
+    }
+    openDialog(){
+        this.dialogRe.open(ReclamationComponent);
     }
     
 }

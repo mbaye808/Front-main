@@ -1,0 +1,21 @@
+
+  <form name="reclamationForm" [formGroup]="reclamationForm" novalidate (ngSubmit)="reclame()">
+
+<label class="form-control-label">Type Réclamation </label>
+ <select style="width: 45%;" formControlName="typeReclamation">
+     <option></option>
+     <option>TP</option>
+     <option>CC</option>
+     <option>DS</option>
+ </select> <br><br>
+ <label class="form-control-label">Etat Réclamation </label>
+ <select style="width: 45%;" formControlName="etat">
+  <option>en cours</option>
+</select> <br><br>
+<label class="form-control-label">Saisir votre réclamation</label> <br><br>
+ <textarea rows="4" cols="30" formControlName="description"></textarea> <br><br>
+ <button  (click)="reclame()">Envoyer</button>
+ 
+</form>
+
+

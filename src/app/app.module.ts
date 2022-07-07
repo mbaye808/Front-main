@@ -39,6 +39,7 @@ import { fuseConfig } from 'app/fuse-config';
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from './layout/layout.module';
 import { SampleModule } from '././main/sample/sample.module';
+import { ReclamationModule } from '././main/reclamation/reclamation.module';
 
 
 import { CalendrierRoutingModule } from './main/calendar/calendrier-routing';
@@ -132,6 +133,7 @@ import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
         // App modules
         LayoutModule,
         SampleModule,
+        ReclamationModule,
         // Jtest5EtudiantModule,
         Jtest5DemandeModule, 
         Jtest5CoreModule,

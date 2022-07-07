@@ -6,7 +6,6 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 
 import { FuseSharedModule } from '@fuse/shared.module';
-
 @NgModule({
   declarations: [HomeComponent],
   imports: [

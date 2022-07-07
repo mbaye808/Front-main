@@ -1,121 +1,51 @@
-<div id="orders" class="page-layout carded fullwidth inner-scroll">
+<div class="page-layout carded fullwidth">
 
-    <!-- TOP BACKGROUND -->
+
     <div class="top-bg accent"></div>
-    <!-- / TOP BACKGROUND -->
 
-    <!-- CENTER -->
     <div class="center">
 
-        <!-- HEADER -->
-        <div class="header accent"
-             fxLayout="column" fxLayoutAlign="center center"
-             fxLayout.gt-xs="row" fxLayoutAlign.gt-xs="space-between center">
-
-            <!-- APP TITLE -->
-            <div class="logo mb-24 mb-sm-0"
-                 fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="logo-icon s-32 mr-16" [@animate]="{value:'*',params:{delay:'50ms',scale:'0.2'}}">
-                    shopping_basket
-                </mat-icon>
-                <span class="logo-text h1" [@animate]="{value:'*',params:{delay:'100ms',x:'-25px'}}">Demandes</span>
-            </div>
-            <!-- / APP TITLE -->
-
-            <!-- SEARCH -->
-            <div class="search-wrapper  ml-sm-32">
-                <div class="search" fxFlex fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>search</mat-icon>
-                    <input #filter placeholder="Search for an order">
-                </div>
-            </div>
-            <!-- / SEARCH -->
-                <!-- ADD EVENT BUTTON -->
-        <button mat-fab class="add-event-button mat-accent"  aria-label="Add event"
-        [@animate]="{value:'*',params:{delay:'300ms',scale:'0.2'}}">
-    <mat-icon>add</mat-icon>
-</button>
-<!-- / ADD EVENT BUTTON -->
+        
+        <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
+            <h2 class="m-0">Module de gestion des réclamations</h2>
         </div>
-        <!-- / HEADER -->
+        <!-- / CONTENT HEADER -->
 
         <!-- CONTENT CARD -->
         <div class="content-card">
 
-            <mat-table class="orders-table"
-                      
-                       matSort
-                       [@animateStagger]="{value:'50'}"
-                       fusePerfectScrollbar>
+            <!-- CONTENT TOOLBAR -->
+            <div class="toolbar px-24 py-8">
+                <span>Réclamation</span>
+            </div>
 
-                <!-- ID Column -->
-                <ng-container matColumnDef="id">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>ID</mat-header-cell>
-                    <mat-cell *matCellDef="let order">
-                        
-                    </mat-cell>
-                </ng-container>
+            <div fxLayout="row" fxLayoutAlign="start" fxFlex="1 0 auto" style="font-size:20px">
 
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="customer">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Type</mat-header-cell>
-                    <mat-cell *matCellDef="let order">
-                        <p class="text-truncate">
-                            
-                        </p>
-                    </mat-cell>
-                </ng-container>
-
-
-                <!-- Payment Column -->
-                <ng-container matColumnDef="payment">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Payment</mat-header-cell>
-                    <mat-cell *matCellDef="let order" fxHide fxShow.gt-sm>
-                        <p class="text-truncate">
-                           
-                        </p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Status Column -->
-                <ng-container matColumnDef="status">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Etat</mat-header-cell>
-                    <mat-cell *matCellDef="let order">
-                        <p class="status text-truncate h6 p-4" >
-                            
-                        </p>
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Date Column -->
-                <ng-container matColumnDef="date">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header fxHide fxShow.gt-sm>Date</mat-header-cell>
-                    <mat-cell *matCellDef="let order" fxHide fxShow.gt-sm>
-                        <p class="text-truncate">
-                           
-                        </p>
-                    </mat-cell>
-                </ng-container>
-
-                <mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></mat-header-row>
-
-                <!-- <mat-row *matRowDef="let order; columns: displayedColumns;"
-                         class="order"
-                         matRipple
-                         [routerLink]="'/apps/e-commerce/orders/'+order.id">
-                </mat-row> -->
-            </mat-table>
-
-            <mat-paginator #paginator
-                           
-                           [pageIndex]="0"
-                           [pageSize]="10"
-                           [pageSizeOptions]="[5, 10, 25, 100]">
-            </mat-paginator>
-
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Type Réclamation</th>
+            <th>Description</th>
+            <th>Nature</th>
+            <th>Date</th>
+            <th>Etat</th>  
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let reclamations of reclamation">
+            <td> {{reclamations.typeReclamation}} </td>
+            <td> {{reclamations.description}} </td>
+            <td> {{reclamations.nature}} </td>     
+            <td> {{reclamations.date}} </td>
+            <td> {{reclamations.etat}} </td>
+        </tr>
+    </tbody>
+</table>
         </div>
-        <!-- / CONTENT CARD -->
+                
+        </div>
+
     </div>
-    <!-- / CENTER -->
+
 </div>
+

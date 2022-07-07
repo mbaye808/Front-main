@@ -8,17 +8,26 @@ import * as moment from 'moment';
 import { createRequestOption } from 'app/shared/util/request-util';
 
 import { SERVER_API_URL } from '../app.constants';
-import { IReclamation } from '../shared/model/reclamation.model';
+import { IReclamation, Reclamation } from '../shared/model/reclamation.model';
 
 type EntityResponseType = HttpResponse<IReclamation>;
 type EntityArrayResponseType = HttpResponse<IReclamation[]>;
 
 @Injectable({ providedIn: 'root' })
 export class ReclamationService {
+
   public resourceUrl = SERVER_API_URL + 'api/reclamations';
 
   constructor(protected http: HttpClient) {}
 
+  public reclamationFromRemote(reclamation: Reclamation):Observable<any>{
+
+    return this.http.post<any>(this.resourceUrl,reclamation)
+  }
+
+  getReclamationList(): Observable<Reclamation[]>{
+    return this.http.get<Reclamation[]>(`${this.resourceUrl}`);
+  }
   create(reclamation: IReclamation): Observable<EntityResponseType> {
     const copy = this.convertDateFromClient(reclamation);
     return this.http

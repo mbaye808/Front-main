@@ -10,7 +10,7 @@ export const navigation: FuseNavigation[] = [
 
             {
                 id       : 'home',
-                title    : 'Home',
+                title    : 'Accueil',
                 type     : 'item',
                 icon     : 'home',
                 url      : '/home'
@@ -33,7 +33,7 @@ export const navigation: FuseNavigation[] = [
             },
             {
                 id       : 'order',
-                title    : 'Order',
+                title    : 'Réclamation',
                 type     : 'item',
                 icon     : 'folder',
                 url      : '/order'

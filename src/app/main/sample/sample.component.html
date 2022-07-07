@@ -1,13 +1,11 @@
 <div class="page-layout carded fullwidth">
 
-    <!-- TOP BACKGROUND -->
-    <div class="top-bg accent"></div>
-    <!-- / TOP BACKGROUND -->
 
-    <!-- CENTER -->
+    <div class="top-bg accent"></div>
+
     <div class="center">
 
-        <!-- CONTENT HEADER -->
+        
         <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
             <h2 class="m-0">Module de gestion des bulletins</h2>
         </div>
@@ -77,7 +75,7 @@
                                 <td width=9%>{{not?.cc}}</td>
                                 <td width=9%>{{not?.ds}}</td>
                                 <td  width=14% > <span *ngIf="not.moyenne">{{not?.moyenne.toFixed(2)}}</span> </td>
-                                <td width=20% ><button type="button" class="btn btn-primary btn-sm" (click)="newContact(not.historiqueElementContitutif,not?.note)" >RECLAMER</button></td>
+                                <td width=20% ><button type="button" class="btn btn-primary btn-sm" (click)="openDialog()">RECLAMER</button></td>
                             </tr>
                             <tr>
                                 <td> <B>{{note.historiqueUniteEnseignement.intitules}}</B> </td>

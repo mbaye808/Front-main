@@ -1,14 +1,22 @@
 import { Moment } from 'moment';
-import { INote } from './note.model';
 
 
 export interface IReclamation {
   id?: number;
   etat?: string;
+  ine?: string;
+  nature?: string;
+  dateDebut?: Date;
+  dateFin?: Date;
+  photo?: any;
+  photoContentType?: string;
+  description?: string;
+  typeReclamation?: string;
   noteReclamation?: number;
   date?: Moment;
-  enseignement?: string;
-  note?: INote;
+  enseignement?: any;
+  note?: any;
+  anneeAccademique?: any;  
 }
 
 export class Reclamation implements IReclamation {
@@ -18,6 +26,15 @@ export class Reclamation implements IReclamation {
     public noteReclamation?: number,
     public date?: Moment,
     public enseignement?: string,
-    public note?: INote
+    public note?: any,
+    public ine?: string,
+    public nature?: string,
+    public dateDebut?: Date,
+    public dateFin?: Date,
+    public photo?: any,
+    public photoContentType?: string,
+    public description?: string,
+    public typeReclamation?: string,
+    public anneeAccademique?: any
   ) {}
 }

@@ -202,12 +202,7 @@ Event(seance: any): any {
         }
         this.selectedDay = day;
         this.refresh();
-    }
-
-   
-    
-
-    
+    }    
 }
 
 
