@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -20,6 +20,9 @@ import { CalendarService } from './calendar.service';
 import { CalendarComponent } from './calendar.component';
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ErrorHandlerInterceptor } from 'app/blocks/interceptor/errorhandler.interceptor';
 
 
 registerLocaleData(localeFr);
@@ -38,6 +41,7 @@ registerLocaleData(localeFr);
         MatInputModule,
         MatSlideToggleModule,
         MatToolbarModule,
+        MatProgressSpinnerModule,
         MatTooltipModule, 
         AngularCalendarModule.forRoot({
             provide   : DateAdapter,
@@ -48,10 +52,16 @@ registerLocaleData(localeFr);
         FuseSharedModule,
         FuseConfirmDialogModule
     ],
-    providers      : [
-        CalendarService
+    providers      : [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: ErrorHandlerInterceptor,
+        multi: true
+        
+    },
+        
+        CalendarService,
+
     ],
-    
 })
 export class CalendarModule
 {

@@ -23,6 +23,7 @@ import { Account } from 'app/core/user/account.model';
 import { User } from 'app/core/user/user.model';
 import { AccountService } from 'app/core/auth/account.service';
 import { ReclamationComponent } from '../reclamation/reclamation.component';
+import { exit } from 'process';
 
 @Component({
     selector   : 'sample',
@@ -72,7 +73,7 @@ export class SampleComponent implements OnInit
         dialogRef.componentInstance.reclamation={id:null,enseignement:"",noteReclamation:null}
         dialogRef.componentInstance.ec=ec;
         let reclamation = new Reclamation();
-        reclamation.note=note;
+      
         reclamation.etat= "En_cours"
         dialogRef.componentInstance.reclamation=reclamation;
     }
@@ -88,10 +89,8 @@ export class SampleComponent implements OnInit
     }
     getGroupeEtudiant(){
         // this.accountService.userConnecter().subscribe((account)=>{
-        //     this.account=account
-            this.classeEt.getClasse().subscribe((res: HttpResponse<IClasse[]>) => {this.classes = res.body || [] , console.log(this.classes)});
-        
-        
+        // this.account=account
+            this.classeEt.getClasse().subscribe((res: HttpResponse<IClasse[]>) => {this.classes = res.body || [] , console.log(this.classes)});            
     }
     getSemestres(){
         this.notes=[]
@@ -99,13 +98,23 @@ export class SampleComponent implements OnInit
     }
     getNotes(){
         this.notes=[]
-        this.semestreService.getsNote(this.classe.id,this.semestre,this.session.id).subscribe((res: HttpResponse<ISemestre[]>) =>{
+        this.semestreService.getsNote(this.classe.id,this.semestre.id,this.session.id).subscribe((res: HttpResponse<ISemestre[]>) =>{
             this.notes = res.body ;
             console.log(res.body)
         } ); 
     }
-    openDialog(){
-        this.dialogRe.open(ReclamationComponent);
+    openDialog(historiqueElementContitutif){
+        let dialog=this.dialogRe.open(ReclamationComponent, {
+            height:'480px' ,
+            width:'550px',
+            maxHeight: '360px',
+            position: { top: "10px" },
+            disableClose: true
+        });
+        dialog.componentInstance.semestre=this.semestre
+        dialog.componentInstance.session=this.session
+        dialog.componentInstance.classe=this.classe
+        dialog.componentInstance.historiqueElementContitutif=historiqueElementContitutif
     }
     
 }

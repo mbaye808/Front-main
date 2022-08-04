@@ -13,6 +13,7 @@ import { fuseAnimations } from '../../../@fuse/animations';
 import { CustomDateFormatter } from './custom-date-formatter.provider';
 import { getHours } from 'date-fns/esm';
 import { DatePipe } from '@angular/common';
+
 moment.lang('fr');
 
 
@@ -37,6 +38,10 @@ export class CalendarComponent implements OnInit
     dialogRef: any;
     events: CalendarEvent[]=[];
   
+    loading$ = this.loader.loading$;
+
+    /* spinnerType:string;
+    spinnerName:string; */
     selectedDay: any; 
     view: string;
     viewDate: Date;
@@ -48,8 +53,13 @@ export class CalendarComponent implements OnInit
         private _calendarService: CalendarService,
         private cdr:ChangeDetectorRef,
         private datepipe:DatePipe,
+        public loader: CalendarService,
     )
+    
     {
+        /* this.spinnerName = 'sp3';
+        this.spinnerType = 'ball-spin-clockwise';
+ */
         // Set the defaults
         this.view = 'week';
         this.viewDate = new Date();
@@ -61,6 +71,12 @@ export class CalendarComponent implements OnInit
          * Get events from service/server
          */
         this.setEvents();
+
+       /*  this.spinner.show(this.spinnerName);
+
+        setTimeout(() => {
+            this.spinner.hide(this.spinnerName);
+        }, 5000); */
     } 
     setEvents(): void
     {

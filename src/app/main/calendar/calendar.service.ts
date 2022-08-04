@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import * as moment from 'moment';
 import { map } from 'rxjs/operators';
 
@@ -14,6 +14,10 @@ export class CalendarService implements Resolve<any>
     events: any;
     onEventsUpdated: Subject<any>;
 
+    private _loading = new BehaviorSubject<boolean>(false);
+
+    public readonly loading$ = this._loading.asObservable();
+
     /**
      * Constructor
      *
@@ -25,6 +29,12 @@ export class CalendarService implements Resolve<any>
     {
         // Set the defaults
         this.onEventsUpdated = new Subject();
+    }
+    show(){
+        this._loading.next(true);
+    }
+    hide(){
+        this._loading.next(false);
     }
 
     // -----------------------------------------------------------------------------------------------------
@@ -103,4 +113,6 @@ export class CalendarService implements Resolve<any>
         }
         return res;
       }
+
+
 }

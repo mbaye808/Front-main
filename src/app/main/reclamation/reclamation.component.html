@@ -1,21 +1,28 @@
 
+  <!-- <span mat-raised-button color="warn" (click)="closes()" style="margin-left: 95%; cursor: pointer;" class="fer">X</span> -->
+  <mat-icon id="close-icon" (click)="closes()" style="margin-left: 95%; cursor: pointer;" class="fer">close</mat-icon>
   <form name="reclamationForm" [formGroup]="reclamationForm" novalidate (ngSubmit)="reclame()">
-
-<label class="form-control-label">Type Réclamation </label>
- <select style="width: 45%;" formControlName="typeReclamation">
-     <option></option>
-     <option>TP</option>
-     <option>CC</option>
-     <option>DS</option>
- </select> <br><br>
- <label class="form-control-label">Etat Réclamation </label>
- <select style="width: 45%;" formControlName="etat">
-  <option>en cours</option>
-</select> <br><br>
-<label class="form-control-label">Saisir votre réclamation</label> <br><br>
- <textarea rows="4" cols="30" formControlName="description"></textarea> <br><br>
- <button  (click)="reclame()">Envoyer</button>
+<div class="form-group">
+  <label class="form-control-label">Type Réclamation </label> <br><br>
+  <select style="width: 45%;" formControlName="typeReclamation">
+      <option></option>
+      <option>TP</option>
+      <option>CC</option>
+      <option>DS</option>
+  </select>
+</div>
+ <div class="form-group">
+  <label class="form-control-label">Saisir votre réclamation</label> <br><br>
+  <textarea rows="4" cols="30" formControlName="description"></textarea>
+ </div>
  
 </form>
+
+<div mat-dialog-actions style="margin-top: 10%;">
+  <div fxLayout="row" fxLayoutAlign="space-between center" >
+      <button mat-raised-button color="warn" (click)="closes()" style="margin-left: 60%;">Retour</button>
+      <button mat-raised-button color="primary" aria-label="OK" (click)="reclame(); closes()" style="margin-left: 2%;" [disabled]="reclamationForm.invalid">OK</button>
+  </div>
+</div>
 
 

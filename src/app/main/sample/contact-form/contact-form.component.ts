@@ -24,7 +24,7 @@ export class ContactsContactFormDialogComponent implements OnInit
     
     contactForm: FormGroup;
     dialogTitle: string;
-    reclamation:any;
+    reclamation:Reclamation;
     ec:any;
     isSaving:any;
     editForm = this._formBuilder.group({
@@ -77,10 +77,10 @@ export class ContactsContactFormDialogComponent implements OnInit
         this.editForm.patchValue({
          
           noteReclamation: reclamation.noteReclamation,
-          note: reclamation.note
+          historiqueElementContitutif: reclamation.historiqueElementContitutif
         });
       }
-    saveReclamation(message: string, action: string){
+  /*   saveReclamation(message: string, action: string){
         this.isSaving = true;
         const reclamation = this.createContactForm();
         if (reclamation.id !== undefined) {
@@ -92,7 +92,7 @@ export class ContactsContactFormDialogComponent implements OnInit
           duration: 2000,
         });
         console.log(reclamation);
-    }
+    } */
    
 
     // -----------------------------------------------------------------------------------------------------
@@ -104,14 +104,14 @@ export class ContactsContactFormDialogComponent implements OnInit
      *
      * @returns {FormGroup}
      */
-    private createContactForm(): IReclamation {
+   /*  private createContactForm(): IReclamation {
         return {
           ...new Reclamation(),
           noteReclamation: this.editForm.get(['noteReclamation'])!.value,
           enseignement: this.editForm.get(['enseignement'])!.value,
           date: moment(Date.now(),'YYYY-MM-DDTHH:mm'),
-          note: this.reclamation.note,
+          historiqueElementContitutif: this.reclamation.historiqueElementContitutif,
           etat: this.reclamation.etat
         };
-      }
+      } */
 }

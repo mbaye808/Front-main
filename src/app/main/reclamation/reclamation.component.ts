@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { ReclamationService } from 'app/service/reclamation.service';
 import { Reclamation } from 'app/shared/model/reclamation.model';
+import * as moment from 'moment';
 
 @Component({
     selector   : 'reclamation',
@@ -17,6 +18,11 @@ export class ReclamationComponent implements OnInit
     reclamation = new Reclamation();
 
     reclamationForm: FormGroup;
+    session:any;
+    semestre:any
+    historiqueElementContitutif: any;
+    classe: import("c:/Users/IBRAHIMA DABO/Desktop/sec-service/Front-main/src/app/shared/model/classe.model").Classe;
+    //date =new Date(Date.now());
 
     constructor(private dialogRe: MatDialog, private _formBuilder: FormBuilder, private _service: ReclamationService, private _router : Router){}
 
@@ -32,33 +38,19 @@ ngOnInit(): void {
             '',
             [
               Validators.required,
-              Validators.minLength(1),
-              Validators.maxLength(50),
-              Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
             ],
           ],
 
           etat: [
             '',
-            [
-              Validators.required,
-              Validators.minLength(1),
-              Validators.maxLength(50),
-              Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
-            ],
           ],
 
           description: [
             '',
             [
               Validators.required,
-              Validators.minLength(1),
-              Validators.maxLength(50),
-              Validators.pattern('^[a-zA-Z0-9!$&*+=?^_`{|}~.-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$|^[_.@A-Za-z0-9-]+$'),
             ],
           ],
-
-
     });
 }
 
@@ -67,8 +59,13 @@ private createReclamation(): Reclamation{
       ...new Reclamation(),
       id: null,
       typeReclamation: this.reclamationForm.get(['typeReclamation'])!.value,
+      nature:"note",
+      session:this.session,
+      semestre:this.semestre,
+      groupe:this.classe,
+      historiqueElementContitutif:this.historiqueElementContitutif,
       description: this.reclamationForm.get(['description'])!.value,
-      etat: this.reclamationForm.get(['etat'])!.value,
+      etat: "ENCOURS",
     }
   }
 
@@ -77,12 +74,19 @@ private createReclamation(): Reclamation{
     this._service.reclamationFromRemote(this.reclamation).subscribe(
       data => {
         alert("votre réclamation est envoyée")
+        this._router.navigate(['/cours']);
   
     },
     error => {
       console.log("verifier vos informations");
   },()=>  this._router.navigate(['/cours']))  
     
+  }
+
+  closes(): void{
+
+    this.dialogRe.closeAll();
+  
   }
 
 }

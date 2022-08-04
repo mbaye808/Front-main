@@ -40,11 +40,11 @@
                             <label class="form-control-label" for="field_semestre"><B>Semestre</B></label>
                             <select class="form-control-lg" id="field_semestre" name="semestre" [(ngModel)]="semestre"  >
                                 <option [ngValue]="null" selected></option>
-                                <option *ngFor="let semestre of semestres" value="{{ semestre.id }}">{{semestre.nomSemestre}}</option>
+                                <option *ngFor="let semestre of semestres" [ngValue]="semestre" >{{semestre.nomSemestre}}</option>
                             </select>
                   </div>
                  
-                    <div  *ngIf="semestre" fxFlex="30"   >
+                    <div  *ngIf="semestre" fxFlex="30" >
                         <label class="form-control-label" for="field_session"><B>Session</B></label>
                         <select class="form-control-lg" id="field_session" name="session" [(ngModel)]="session" (ngModelChange)= "getNotes()" >
                             <option [ngValue]="null" selected></option>
@@ -75,7 +75,7 @@
                                 <td width=9%>{{not?.cc}}</td>
                                 <td width=9%>{{not?.ds}}</td>
                                 <td  width=14% > <span *ngIf="not.moyenne">{{not?.moyenne.toFixed(2)}}</span> </td>
-                                <td width=20% ><button type="button" class="btn btn-primary btn-sm" (click)="openDialog()">RECLAMER</button></td>
+                                <td width=20% ><button type="button" class="btn btn-primary btn-sm" (click)="openDialog(not.historiqueElementContitutif)">RECLAMER</button></td>
                             </tr>
                             <tr>
                                 <td> <B>{{note.historiqueUniteEnseignement.intitules}}</B> </td>

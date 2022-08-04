@@ -1,5 +1,7 @@
 <div id="calendar" class="page-layout simple fullwidth">
 
+   
+
     <!-- HEADER -->
     <div class="header p-16 p-sm-24" [ngClass]="viewDate | date:'MMM'">
 
@@ -30,7 +32,8 @@
                         [view]="view"
                         [(viewDate)]="viewDate"
                         (viewDateChange)="emploiDuTp()"
-                        aria-label="Previous">
+                        aria-label="Previous"
+                        (click)="loader.show()">
                     <mat-icon>chevron_left</mat-icon>
                 </button>
 
@@ -46,6 +49,8 @@
                         aria-label="Next">
                     <mat-icon>chevron_right</mat-icon>
                 </button>
+                
+
             </div>
             <!-- / HEADER BOTTOM -->
         </div>
@@ -55,9 +60,13 @@
     <!-- / HEADER -->
 
     <!-- CONTENT -->
+     <mat-progress-spinner [mode]="'indeterminate'" *ngIf="loading$ | async"
+    style="margin-left: 46%;"></mat-progress-spinner> 
+
+    <!-- <ngx-spinner [name]="spinnerName" [type]="spinnerType"></ngx-spinner> -->
     <div class="content" fusePerfectScrollbar [@animate]="{value:'*',params:{y:'50px'}}">
        
-            
+        
             <mwl-calendar-week-view
                 
                 [viewDate]="viewDate"

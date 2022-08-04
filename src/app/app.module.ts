@@ -22,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import {LoginModule} from './shared/login/login.module';
 import {HomeModule} from './main/home/home.module';
+import {AlumniModule} from './main/alumni/alumni.module';
 import {AccueilModule} from './accueil/accueil.module';
 // import { EtudiantRoutingModule } from './main/etudiant/etudiant-routing.module';
 // import {  Jtest5EtudiantModule } from './main/etudiant/etudiant.module';
@@ -40,7 +41,9 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from './layout/layout.module';
 import { SampleModule } from '././main/sample/sample.module';
 import { ReclamationModule } from '././main/reclamation/reclamation.module';
-
+import { TransfertModule } from '././main/transfert/transfert.module';
+import { UpdateModule } from '././main/update/update.module';
+import { MatConfirmDialogModule } from '././main/mat-confirm-dialog/mat-confirm-dialog.module';
 
 import { CalendrierRoutingModule } from './main/calendar/calendrier-routing';
 import { CalendarModule } from './main/calendar/calendar.module';
@@ -48,6 +51,8 @@ import { EcommerceModule } from './main/orders/orders.module';
 import { EcommerceRouterModule } from './main/orders/order-routing';
 import { AuthExpiredInterceptor } from './blocks/interceptor/auth-expired.interceptor';
 import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
  const appRoutes: Routes = [
     {
@@ -115,6 +120,8 @@ import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
         EcommerceRouterModule,
         // Material
         MatButtonModule,
+        MatToolbarModule,
+        MatProgressSpinnerModule,
         MatIconModule,
         MatTableModule,
         // FontAwesomeModule, 
@@ -134,11 +141,15 @@ import { AuthInterceptor } from './blocks/interceptor/auth.interceptor';
         LayoutModule,
         SampleModule,
         ReclamationModule,
+        TransfertModule,
+        MatConfirmDialogModule,
         // Jtest5EtudiantModule,
         Jtest5DemandeModule, 
         Jtest5CoreModule,
         LoginModule,
         HomeModule,
+        AlumniModule,
+        UpdateModule,
         AccueilModule,
         MailConfirmModule 
     ],

@@ -35,10 +35,16 @@ export const navigation: FuseNavigation[] = [
                 id       : 'order',
                 title    : 'Réclamation',
                 type     : 'item',
-                icon     : 'folder',
+                icon     : 'table',
                 url      : '/order'
             },
-         
+            {
+                id       : 'alumni',
+                title    : 'Alumni',
+                type     : 'item',
+                icon     : 'folder',
+                url      : '/alumni'
+            },
         ]
     }
 ];

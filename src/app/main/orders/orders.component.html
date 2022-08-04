@@ -7,7 +7,7 @@
 
         
         <div class="header accent p-24" fxLayout="row" fxLayoutAlign="start center">
-            <h2 class="m-0">Module de gestion des réclamations</h2>
+            <span style="cursor: pointer;" (click)="openDialogue()">Autres +</span>
         </div>
         <!-- / CONTENT HEADER -->
 
@@ -19,25 +19,32 @@
                 <span>Réclamation</span>
             </div>
 
-            <div fxLayout="row" fxLayoutAlign="start" fxFlex="1 0 auto" style="font-size:20px">
+            <div fxLayout="row" fxLayoutAlign="start">
 
 <table class="table table-striped">
     <thead>
         <tr>
             <th>Type Réclamation</th>
             <th>Description</th>
-            <th>Nature</th>
             <th>Date</th>
-            <th>Etat</th>  
+            <th>Etat</th>
+            <th>Action</th>  
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let reclamations of reclamation">
-            <td> {{reclamations.typeReclamation}} </td>
-            <td> {{reclamations.description}} </td>
-            <td> {{reclamations.nature}} </td>     
-            <td> {{reclamations.date}} </td>
+        <tr *ngFor="let reclamations of reclamation" >
+            <td>  {{reclamations.nature}} {{reclamations.typeReclamation}} </td>
+            <td> {{reclamations.description}} </td>    
+            <td> {{reclamations.date | date:'dd/MM/yyyy'}} </td>
             <td> {{reclamations.etat}} </td>
+            <td>
+                <!-- <button (click)="deleteReclamation(reclamations)" class="btn btn-danger" style="margin-left: 10px;">Supprimer</button> -->
+                    
+                    <button mat-icon-button color="warn" (click)="deleteReclamation(reclamations)"><mat-icon>delete_outline</mat-icon></button>
+                   
+                    <button mat-icon-button color="primary" (click)="updateReclamation(reclamations)"><mat-icon>edit</mat-icon></button>
+                    <!-- <button (click)="updateReclamation(reclamations.id)" class="btn btn-info"> Modifier</button> -->
+                </td>
         </tr>
     </tbody>
 </table>

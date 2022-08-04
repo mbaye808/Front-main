@@ -15,8 +15,11 @@ export interface IReclamation {
   noteReclamation?: number;
   date?: Moment;
   enseignement?: any;
-  note?: any;
-  anneeAccademique?: any;  
+  historiqueElementContitutif?: any;
+  anneeAccademique?: any;
+  session?: any;
+  semestre?: any;  
+  groupe?:any;
 }
 
 export class Reclamation implements IReclamation {
@@ -26,7 +29,7 @@ export class Reclamation implements IReclamation {
     public noteReclamation?: number,
     public date?: Moment,
     public enseignement?: string,
-    public note?: any,
+    public historiqueElementContitutif?: any,
     public ine?: string,
     public nature?: string,
     public dateDebut?: Date,
@@ -35,6 +38,9 @@ export class Reclamation implements IReclamation {
     public photoContentType?: string,
     public description?: string,
     public typeReclamation?: string,
-    public anneeAccademique?: any
+    public anneeAccademique?: any,
+    public session?: any,
+    public semestre?: any, 
+    public groupe?:any
   ) {}
 }

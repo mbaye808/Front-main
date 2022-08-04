@@ -1,0 +1,68 @@
+<mat-icon id="close-icon" (click)="close()" style="margin-left: 95%; cursor: pointer;" class="fer">close</mat-icon>
+<div class="transfert">
+
+<form name="transfertForm" [formGroup]="transfertForm" novalidate (ngSubmit)="onSubmit()">
+
+   <label class="form-control-label">Nature Réclamation </label> <br><br>
+    <select class="nat" formControlName="nature">
+        <option></option>
+        <option value="Service">Service</option>
+        <option value="Absence">Absence</option>
+        <option value="Environnement">Environnement</option>
+    </select> <br><br>
+
+   <label class="form-control-label">Saisir votre réclamation</label> <br><br>
+    <textarea rows="4" class="saisir" cols="30" formControlName="description"></textarea> <br><br>
+    <div *ngIf="this.transfertForm.get(['nature'])!.value=='Absence'">
+       <label class="form-control-label">Date Debut </label> <input type="date" class="dd" formControlName="dateDebut"> <br><br>
+    </div>
+    <div *ngIf="this.transfertForm.get(['nature'])!.value=='Absence'">
+       <label class="form-control-label">Date Fin </label> <input type="date" class="df" formControlName="dateFin">
+    </div>
+
+   <div class="form-group" style="margin-top: 3%;">
+       <label for="field_pieceIdentite" class="label">Telecharger image</label>
+       <div>
+         <div *ngIf="transfertForm.get('photo')!.value" class="form-text text-danger clearfix">
+           <a
+             class="pull-left"
+             (click)="openFile(transfertForm.get('photoContentType')!.value, transfertForm.get('photo')!.value)"
+             jhiTranslate="entity.action.open"
+             style="margin-top: 1%; cursor: pointer;"
+             >Ouvrir</a>
+           <button
+             style="margin-top: 2%;"
+             type="button"
+             (click)="transfertForm.patchValue({ photo: null }); transfertForm.patchValue({ photoContentType: null })"
+             class="btn btn-secondary btn-xs pull-right"
+           >
+             <!-- <fa-icon icon="times"></fa-icon> -->
+           </button>
+         </div>
+         <input
+           type="file"
+           id="file_pieceIdentite"
+           (change)="setFileData($event, 'photo', false)"
+         />
+       </div>
+       <input type="hidden" class="form-control" name="photo" id="field_pieceIdentite" formControlName="photo" />
+       <input
+         type="hidden"
+         class="form-control"
+         name="photoContentType"
+         id="field_pieceIdentiteContentType"
+         formControlName="photoContentType"
+       />
+     </div>
+</form>
+<div mat-dialog-actions style="margin-top: 5%;">
+ <div fxLayout="row" fxLayoutAlign="space-between center" >
+     <button mat-raised-button color="warn" (click)="close()" style="margin-left: 60%; border-radius: 20px; margin-bottom: 8px;">Retour</button>
+     <button mat-raised-button color="primary" aria-label="OK" (click)="onSubmit()" style="margin-left: 2%; border-radius: 20px; margin-bottom: 8px;" 
+     [disabled]="transfertForm.invalid"
+    >Modifier</button>
+ </div>
+</div>
+</div>
+     
+   
